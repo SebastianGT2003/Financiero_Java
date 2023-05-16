@@ -10,4 +10,9 @@ public class servicio {
         this.id=id;
 
     }
+
+    @Override
+    public String toString(){
+        return "Id "+this.id+"\nValor: "+this.valor+"\nNombre: "+this.nombre;
+    }
 }

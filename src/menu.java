@@ -1,8 +1,10 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class menu {
 
     public void Menu(usuario u)throws financieraException{
+
         while (true) {
 
             Scanner entrada = new Scanner(System.in);
@@ -20,56 +22,55 @@ public class menu {
 
             try {
                 System.out.print("Ingrese la accion que desea realizar: ");
-                int opc= entrada.nextInt();
+                String opc= entrada.nextLine();
 
-                if (opc == 1){
+                if (opc.equals("1")){
                     u.agregarSaldo();
                 }
 
 
-                if (opc == 2) {
+                if (opc.equals("2")) {
                     u.verDeudas();
                 }
 
-                if (opc == 3){
+                if (opc.equals("3")){
                     u.agregarDeuda();
                 }
 
-                if (opc == 4) {
+                if (opc.equals("4")) {
                     u.pagarDeuda();
                 }
 
-                if (opc == 5) {
+                if (opc.equals("5")) {
                     u.verServicios();
                 }
 
-                if (opc == 6) {
+                if (opc.equals("6")) {
                     u.agregarServicio();
                 }
 
-                if (opc == 7){
+                if (opc.equals("7")){
                     u.pagar_servicio();
                 }
 
-                if (opc == 8) {
+                if (opc.equals("8")) {
                     u.verTransacciones();
                 }
-                if (opc == 9) {
+                if (opc.equals("9")) {
                     u.verSaldo();
                 }
-                if (opc == 10) {
+                if (opc.equals("10")) {
                     System.out.println("Fue un placer atenderte espero que vuelvas pronto!");
                     break;
                 }
 
-                if (opc > 10 || opc <1){
+                if (Integer.parseInt(opc) > 10 || Integer.parseInt(opc) < 1){
                     throw new financieraException("\nEsta opcion no es valida en este menu\n");
                 }
 
 
-            }catch(NumberFormatException e){
-                System.out.println("Error no se pueden ingresar letras!");
-
+            }catch(InputMismatchException e){
+                System.out.println("\nError no se pueden ingresar letras!\n");
             }
 
             }

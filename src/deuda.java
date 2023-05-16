@@ -20,7 +20,7 @@ public class deuda {
     }
     @Override
     public String toString(){
-        return "ID: "+ this.id +  "\nValor: "+ this.valor+" \nFecha: "+this.fecha+"\nInteres: "+this.intereses + "%" + "\nDescripcion: "+this.descripcion+"\n";
+        return "ID: "+ this.id +  "\nValor: "+ this.valor+" \nFecha: "+this.fecha+"\nInteres: "+this.intereses + "%" + "\nDescripcion: "+this.descripcion;
     }
 }
 

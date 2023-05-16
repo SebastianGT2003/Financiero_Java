@@ -35,7 +35,7 @@ public class usuario {
         try{
             System.out.print("Ingrese saldo a agregar: ");
             int saldo=entrada.nextInt();
-            while (saldo<=0){
+            while (saldo<0){
                 System.out.println("El número ingresado debe ser mayor a cero");
                 System.out.print("Ingrese saldo a agregar: ");
                 saldo = entrada.nextInt();}
@@ -61,7 +61,7 @@ public class usuario {
         try {
             System.out.print("Ingrese el valor de la deuda: ");
             int valor = scanner.nextInt();
-            while (valor<=0){
+            while (valor<0){
                 System.out.println("El número ingresado debe ser mayor a cero");
                 System.out.print("Ingrese nuevamente el valor de la deuda: ");
                 valor = scanner.nextInt();}
@@ -72,7 +72,7 @@ public class usuario {
             total_deudas += 1;
             System.out.print("Ingrese el porcentaje de interés mensual: ");
             int interes = scanner.nextInt();
-            if (interes<=0){
+            if (interes<0){
                 System.out.println("El valor del interes ingresado debe ser igual o mayor a cero");
                 System.out.print("Ingrese nuevamente el porcentaje: ");
                 interes = scanner.nextInt();}
@@ -93,7 +93,7 @@ public class usuario {
         try {
             System.out.print("Ingrese el valor del servicio: ");
             int valor = scanner.nextInt();
-            while (valor<=0){
+            while (valor<0){
                 System.out.println("El número ingresado debe ser mayor a cero");
                 System.out.print("Ingrese nuevamente el valor del servicio: ");
                 valor = scanner.nextInt();}
@@ -132,8 +132,10 @@ public class usuario {
                     transacciones.add(newTransaccion);
                     deudas.remove(id - 1);
                     System.out.println("\nDeuda pagada con exito\n");
+                    break;
                 }
             }
+            System.out.println("\nNo existe una deuda con ese ID\n");
         }
     }
 
@@ -158,7 +160,8 @@ public class usuario {
                     System.out.println("\nServicio pagado con exito!!!\n");
                     return;
                 }
-            }System.out.println("No existe un servicio con ese ID ");
+            }
+            System.out.println("\nNo existe un servicio con ese ID\n");
         }
     }
 
