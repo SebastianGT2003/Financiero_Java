@@ -17,6 +17,6 @@ public class transaccion {
     }
     @Override
     public String toString(){
-        return "Fecha: "+this.fecha+"\n Valor: "+this.valor+"\n Descripcion: "+this.descripcion+"\n";
+        return "Fecha: "+this.fecha+"\nValor: "+this.valor+"\nDescripcion: "+this.descripcion+"\n";
     }
 }

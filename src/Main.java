@@ -2,16 +2,12 @@
 // then press Enter. You can now see whitespace characters in your code.
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Intro with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        LocalDateTime fechaHoraActual = LocalDateTime.now();
-
-        LocalDate fechaActual = fechaHoraActual.toLocalDate();
-        System.out.println("Fecha actual: " + fechaActual);
-        // Press Mayús+F10 or click the green arrow button in the gutter to run the code.
-
+    public static void main(String[] args) throws financieraException {
+        menu m = new menu();
+        usuario u = new usuario("Sebastian", "123", 2000000);
+        m.Menu(u);
     }
 }

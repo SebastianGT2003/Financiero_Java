@@ -32,11 +32,11 @@ public class menu {
                 }
 
                 if (opc == 3){
-                    u.agregar_deuda();
+                    u.agregarDeuda();
                 }
 
                 if (opc == 4) {
-                    u.pagar_deuda();
+                    u.pagarDeuda();
                 }
 
                 if (opc == 5) {
@@ -44,7 +44,7 @@ public class menu {
                 }
 
                 if (opc == 6) {
-                    u.agregar_servicio();
+                    u.agregarServicio();
                 }
 
                 if (opc == 7){
