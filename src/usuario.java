@@ -103,7 +103,7 @@ public class usuario {
             total_servicios += 1;
             servicio newServicio = new servicio(valor, nombre, total_servicios);
             servicios.add(newServicio);
-            System.out.println("\nServicio agregado con éxito!!!!");
+            System.out.println("\nServicio agregado con éxito!!!");
             System.out.println();
 
         } catch (InputMismatchException e) {
