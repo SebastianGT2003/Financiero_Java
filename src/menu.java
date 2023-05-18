@@ -22,49 +22,48 @@ public class menu {
 
             try {
                 System.out.print("Ingrese la accion que desea realizar: ");
-                String opc= entrada.nextLine();
+                int opc= entrada.nextInt();
 
-                if (opc.equals("1")){
+                if (opc == 1){
                     u.agregarSaldo();
                 }
 
-
-                if (opc.equals("2")) {
+                if (opc == 2) {
                     u.verDeudas();
                 }
 
-                if (opc.equals("3")){
+                if (opc == 3){
                     u.agregarDeuda();
                 }
 
-                if (opc.equals("4")) {
+                if (opc == 4) {
                     u.pagarDeuda();
                 }
 
-                if (opc.equals("5")) {
+                if (opc == 5) {
                     u.verServicios();
                 }
 
-                if (opc.equals("6")) {
+                if (opc == 6) {
                     u.agregarServicio();
                 }
 
-                if (opc.equals("7")){
+                if (opc == 7){
                     u.pagar_servicio();
                 }
 
-                if (opc.equals("8")) {
+                if (opc == 8) {
                     u.verTransacciones();
                 }
-                if (opc.equals("9")) {
+                if (opc == 9) {
                     u.verSaldo();
                 }
-                if (opc.equals("10")) {
+                if (opc == 10) {
                     System.out.println("Fue un placer atenderte espero que vuelvas pronto!");
                     break;
                 }
 
-                if (Integer.parseInt(opc) > 10 || Integer.parseInt(opc) < 1){
+                if (opc > 10 || opc < 1){
                     throw new financieraException("\nEsta opcion no es valida en este menu\n");
                 }
 
