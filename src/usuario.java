@@ -11,13 +11,12 @@ public class usuario {
     public final String cedula;
     public int saldo;
     public List<transaccion> transacciones = new ArrayList<>();
-    ;
-    public List<deuda> deudas = new ArrayList<>();;
-    public List<servicio> servicios = new ArrayList<>();;
+    public List<deuda> deudas = new ArrayList<>();
+    public List<servicio> servicios = new ArrayList<>();
     public int total_servicios;
     public int total_deudas;
     public int total_transacciones;
-
+    boolean valorAdecuado = false;
 
     public usuario(String nombre, String cedula, int saldo) {
         this.nombre = nombre;
@@ -26,101 +25,95 @@ public class usuario {
     }
 
     public void verSaldo(){
-            System.out.println("\n Su saldo actual es " + this.saldo + " pesos \n");
+            System.out.println("\nSu saldo actual es " + this.saldo + " pesos \n");
     }
 
-    public void agregarSaldo(){
+    public void agregarSaldo() {
         System.out.println();
-        Scanner entrada = new Scanner(System.in);
-        try{
-            System.out.print("Ingrese saldo a agregar: ");
-            int saldo=entrada.nextInt();
-            while (saldo<0){
-                System.out.println("El número ingresado debe ser mayor a cero");
-                System.out.print("Ingrese saldo a agregar: ");
-                saldo = entrada.nextInt();}
-            LocalDateTime fechaHoraActual = LocalDateTime.now();
-            LocalDate fechaActual = fechaHoraActual.toLocalDate();
-            this.saldo+=saldo;
-            total_transacciones += 1;
-            transaccion new_transaccion= new transaccion(total_transacciones, fechaActual, saldo, "Ingresos");
-            this.transacciones.add(new_transaccion);
-            System.out.println("\nSaldo ingresado correctamente!!!");
-            System.out.println();
-            verSaldo();
+        int saldo = 0;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese saldo a agregar: ");
+        saldo = Evaluar(valorAdecuado, saldo, scanner);
+        while (saldo <= 0) {
+            System.out.print("El valor debe ser mayor a cero, ingrese nuevamente el valor: ");
+            saldo = Evaluar(valorAdecuado, saldo, scanner);
+        }
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        LocalDate fechaActual = fechaHoraActual.toLocalDate();
+        this.saldo += saldo;
+        total_transacciones += 1;
+        transaccion new_transaccion = new transaccion(total_transacciones, fechaActual, saldo, "Ingresos");
+        this.transacciones.add(new_transaccion);
+        System.out.println("\nSaldo ingresado correctamente!!!");
+        verSaldo();
+    }
+
+
+    public void agregarDeuda() {
+        int valor = 5;
+        int interes = 5;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nIngrese el valor de la deuda: ");
+        valor = Evaluar(valorAdecuado, valor, scanner);
+        scanner.nextLine();
+        System.out.print("Ingrese descripcion de la deuda: ");
+        String descripcion = scanner.nextLine();
+        LocalDate fechaInicio = LocalDate.now();
+        System.out.print("Ingrese el porcentaje de interés mensual: ");
+        interes = Evaluar(valorAdecuado, interes, scanner);
+        while (interes < 0) {
+            System.out.print("El valor debe ser positivo, ingrese nuevamente el valor: ");
+            interes = Evaluar(valorAdecuado, interes, scanner);
+        }
+        total_deudas += 1;
+        deuda newDeuda = new deuda(total_deudas, valor, fechaInicio, descripcion, interes);
+        this.deudas.add(newDeuda);
+        System.out.println("\nDeuda agregada con éxito!!!!");
+        System.out.println();
+    }
+
+    static int Evaluar(boolean valorAdecuado, int valor, Scanner scanner) {
+        while(!valorAdecuado) {
+            if (scanner.hasNextInt()) {
+                valor = scanner.nextInt();
+                valorAdecuado = true; // Valor adecuado, salir del bucle
+            } else {
+                System.out.print("El valor debe ser un numero, ingrese nuevamente la opcion:");
+                scanner.nextLine(); // Limpiar el buffer de entrada
             }
-
-        catch(InputMismatchException e){
-            System.out.println("Error: no se pueden ingresar letras \n");
         }
+        return valor;
     }
 
-    public void agregarDeuda(){
+    public void agregarServicio() {
         Scanner scanner = new Scanner(System.in);
         System.out.println();
-        try {
-            System.out.print("Ingrese el valor de la deuda: ");
-            int valor = scanner.nextInt();
-            while (valor<0){
-                System.out.println("El número ingresado debe ser mayor a cero");
-                System.out.print("Ingrese nuevamente el valor de la deuda: ");
-                valor = scanner.nextInt();}
-            scanner.nextLine();
-            System.out.print("Ingrese descripcion de la deuda: ");
-            String descripcion = scanner.nextLine();
-            LocalDate fechaInicio = LocalDate.now();
-            total_deudas += 1;
-            System.out.print("Ingrese el porcentaje de interés mensual: ");
-            int interes = scanner.nextInt();
-            if (interes<0){
-                System.out.println("El valor del interes ingresado debe ser igual o mayor a cero");
-                System.out.print("Ingrese nuevamente el porcentaje: ");
-                interes = scanner.nextInt();}
-            deuda newDeuda = new deuda(total_deudas, valor, fechaInicio, descripcion, interes);
-            this.deudas.add(newDeuda);
-            System.out.println("\nDeuda agregada con éxito!!!!");
-            System.out.println();
+        int valor = 0;
+        System.out.print("Ingrese el valor del servicio: ");
+        valor = Evaluar(valorAdecuado, valor, scanner);
+        while (valor <= 0) {
+            System.out.print("El valor debe ser positivo, ingrese nuevamente el valor: ");
+            valor = Evaluar(valorAdecuado, valor, scanner);
         }
-         catch (InputMismatchException e) {
-            System.out.println("Error: no se pueden ingresar letras \n");
-        }
-    }
-
-
-    public void agregarServicio() throws financieraException {
-        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        System.out.print("Ingrese el nombre del servicio: ");
+        String nombre = scanner.nextLine();
+        total_servicios += 1;
+        servicio newServicio = new servicio(valor, nombre, total_servicios);
+        servicios.add(newServicio);
+        System.out.println("\nServicio agregado con éxito!!!");
         System.out.println();
-        try {
-            System.out.print("Ingrese el valor del servicio: ");
-            int valor = scanner.nextInt();
-            while (valor<0){
-                System.out.println("El número ingresado debe ser mayor a cero");
-                System.out.print("Ingrese nuevamente el valor del servicio: ");
-                valor = scanner.nextInt();}
-            scanner.nextLine();
-            System.out.print("Ingrese el nombre del servicio: ");
-            String nombre = scanner.nextLine();
-            total_servicios += 1;
-            servicio newServicio = new servicio(valor, nombre, total_servicios);
-            servicios.add(newServicio);
-            System.out.println("\nServicio agregado con éxito!!!");
-            System.out.println();
-
-        } catch (InputMismatchException e) {
-            System.out.println("Error: no se pueden ingresar letras \n");
-        }
     }
-
-
 
     public void pagarDeuda(){
         verDeudas();
+        int id = 0;
         if (deudas.isEmpty()) {
             return;
         } else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Ingrese el id de la deuda: ");
-            int id = scanner.nextInt();
+            id = Evaluar(valorAdecuado, id, scanner);
             for (deuda deuda : deudas) {
                 if (deuda.id == id) {
                     if (deuda.valor > saldo) {
@@ -141,12 +134,13 @@ public class usuario {
 
     public void pagar_servicio() throws financieraException{
         verServicios();
+        int id = 0;
         if (servicios.isEmpty()) {
             return;
         } else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Ingrese el id del servicio: ");
-            int id = scanner.nextInt();
+            id = Evaluar(valorAdecuado, id, scanner);
             for (servicio servicio : servicios) {
                 if (servicio.id == id) {
                     if (servicio.valor > saldo) {
@@ -178,7 +172,7 @@ public class usuario {
         }
         System.out.println();
     }
-    public void verServicios() throws financieraException{
+    public void verServicios(){
         System.out.println();
         if (this.servicios.isEmpty()) {
             System.out.println("No tienes servicios por pagar");
@@ -192,7 +186,7 @@ public class usuario {
         System.out.println();
     }
 
-    public void verTransacciones() throws financieraException{
+    public void verTransacciones(){
         System.out.println();
         if (transacciones.isEmpty()) {
             System.out.println("No has hecho transacciones ");
